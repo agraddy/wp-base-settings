@@ -1,0 +1,11 @@
+{
+    "name": "agraddy/wp-base-settings",
+    "type": "library",
+    "require": {},
+    "autoload": {
+	    "psr-4": {
+		    "agraddy\\base": "src/"
+	    }
+    },
+    "version": "0.1.0"
+}
