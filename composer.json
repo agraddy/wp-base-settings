@@ -4,7 +4,7 @@
     "require": {},
     "autoload": {
 	    "psr-4": {
-		    "agraddy\\base": "src/"
+		    "agraddy\\base\\": "src/"
 	    }
     },
     "version": "0.1.0"
