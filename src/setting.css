@@ -1,0 +1,16 @@
+.setting_page .form-table input[type=text] {
+	width: 100%;
+	max-width: 500px;          
+	margin-bottom: 6px;    
+}
+
+.setting_page .form-table textarea {
+	width: 100%;
+	max-width: 500px;          
+	height: 150px;         
+	margin-bottom: 6px;    
+} 
+
+.setting_page .spinner {
+	float: none;           
+} 
