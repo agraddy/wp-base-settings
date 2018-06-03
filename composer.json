@@ -1,6 +1,7 @@
 {
     "name": "agraddy/wp-base-settings",
     "description": "Allows easy creation of Wordpress settings pages.",
+    "license": "MIT",
     "type": "library",
     "require": {},
     "autoload": {
