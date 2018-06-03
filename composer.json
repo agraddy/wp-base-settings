@@ -1,6 +1,6 @@
 {
     "name": "agraddy/wp-base-settings",
-    "description": "Allows you to easily create Wordpress settings pages.",
+    "description": "Allows easy creation of Wordpress settings pages.",
     "type": "library",
     "require": {},
     "autoload": {
