@@ -38,6 +38,7 @@ class Setting {
 			for($i = 0; $i < count($this->names); $i++) {
 				array_push($this->sanitizes_args[$i], $_POST[$this->names[$i]]);
 				$value = call_user_func_array($this->sanitizes[$i], $this->sanitizes_args[$i]);
+				$value = stripslashes($value);
 				update_option($this->key . '_' . $this->names[$i], $value);
 			}
 
