@@ -14,12 +14,16 @@
 				<td>
 					<?php if($elements[$i] == 'select'): ?>
 					<?php echo $codes[$i]; ?>
+					<p class="description"><?php echo $descriptions[$i]; ?></p>
+					<?php elseif($elements[$i] == 'checkbox'): ?>
+						<label><input type="checkbox" name="<?php echo $names[$i]; ?>" value="yes" <?php echo ($values[$i] == 'yes') ? 'checked' : ''; ?> /> <?php echo $descriptions[$i]; ?></label>
 					<?php elseif($elements[$i] == 'text'): ?>
 					<input type="text" name="<?php echo $names[$i]; ?>" value="<?php echo $values[$i]; ?>" />
+					<p class="description"><?php echo $descriptions[$i]; ?></p>
 					<?php elseif($elements[$i] == 'textarea'): ?>
 					<textarea name="<?php echo $names[$i]; ?>"><?php echo $values[$i]; ?></textarea>
-					<?php endif; ?>
 					<p class="description"><?php echo $descriptions[$i]; ?></p>
+					<?php endif; ?>
 				</td>
 			</tr>
 			<?php endfor; ?>

@@ -24,7 +24,10 @@ class Settings {
 		return get_option($this->config['key'] . '_' . $name);
 	}
 
-	function page($title, $action) {
+	function page($title, $action = '') {
+		if(!$action) {
+			$action = $this->config['key'] . '_' .$this->parseToKey($title);
+		}
 		return new Setting($this->config['key'], $title, $action);
 	}
 
