@@ -36,10 +36,18 @@ class Setting {
 
 		if($pass) {
 			for($i = 0; $i < count($this->names); $i++) {
-				array_push($this->sanitizes_args[$i], $_POST[$this->names[$i]]);
-				$value = call_user_func_array($this->sanitizes[$i], $this->sanitizes_args[$i]);
-				$value = stripslashes($value);
-				update_option($this->key . '_' . $this->names[$i], $value);
+				if($this->elements[$i] == 'table_expand') {
+					$extra = $this->codes[$i];
+					for($j = 0; $j < count($extra['fields']); $j++) {
+						$value = $_POST[$extra['fields'][$j]];
+						update_option($this->key . '_' . $extra['fields'][$j], $value);
+					}
+				} else {
+					array_push($this->sanitizes_args[$i], $_POST[$this->names[$i]]);
+					$value = call_user_func_array($this->sanitizes[$i], $this->sanitizes_args[$i]);
+					$value = stripslashes($value);
+					update_option($this->key . '_' . $this->names[$i], $value);
+				}
 			}
 
 			$output = array();
@@ -57,7 +65,11 @@ class Setting {
 
 	function add($type, $title, $description = '', $extra = []) {
 		$name = $this->parseToKey($title);
-		$value = get_option($this->key . '_' . $name);
+		if($type == 'table_expand') {
+			$value = '';
+		} else {
+			$value = get_option($this->key . '_' . $name);
+		}
 		array_push($this->titles, $title);
 		array_push($this->descriptions, $description);
 
@@ -88,6 +100,20 @@ class Setting {
 			array_push($this->elements, 'select');
 			array_push($this->sanitizes, 'preg_replace');
 			array_push($this->sanitizes_args, ['/[^0-9]/', '']);
+		} elseif($type == 'table_expand') {
+			$extra['values'] = [];
+			for($i = 0; $i < count($extra['fields']); $i++) {
+				$extra['values'][$extra['fields'][$i]] = get_option($this->key . '_' . $extra['fields'][$i]);
+				if(!$extra['values'][$extra['fields'][$i]]) {
+					$extra['values'][$extra['fields'][$i]] = [];
+				}
+			}
+			array_push($this->codes, $extra);
+			array_push($this->names, $name);
+			array_push($this->values, $value);
+			array_push($this->elements, $type);
+			array_push($this->sanitizes, 'sanitize_text_field');
+			array_push($this->sanitizes_args, []);
 		} else {
 			array_push($this->codes, '');
 			array_push($this->names, $name);
@@ -101,7 +127,6 @@ class Setting {
 	function adminEnqueueScripts($hook) {
 		if($hook == 'admin_page_' . $this->action || $hook == 'settings_page_' . $this->action) {
 			wp_enqueue_script($this->action, plugins_url('setting.js', __FILE__), array('jquery'));
-
 			wp_enqueue_style($this->action, plugins_url('setting.css', __FILE__));
 		}
 	}

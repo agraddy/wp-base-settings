@@ -1,6 +1,26 @@
 (function() {
 	var $;                 
 
+	function clickAddRow() {
+		var $tr = $(this).closest('tr');
+		var $last = $tr.prev().clone();
+
+		$last.find('th').replaceWith('<td><a href="#" class="button delete_row">X</a></td>');
+		$last.find('input').each(function() {
+			$(this).val('');
+		});
+		$tr.before($last);
+		return false;
+	}
+
+	function clickDeleteRow() {
+		var $tr = $(this).closest('tr');
+		if(confirm('Are you sure you want to delete this row?')) {
+			$tr.remove();
+		}
+		return false;
+	}
+
 	function formSubmit() {
 		var $form = $(this);            
 		var $button = $form.find('.button-primary');
@@ -96,6 +116,9 @@
 
 	function init() {
 		$(document).on('submit', '.setting_page form', formSubmit);
+
+		$(document).on('click', '.add_row', clickAddRow);
+		$(document).on('click', '.delete_row', clickDeleteRow);
 	}
 
 	if(typeof global == 'undefined') {
