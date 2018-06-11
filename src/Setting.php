@@ -105,7 +105,7 @@ class Setting {
 			for($i = 0; $i < count($extra['fields']); $i++) {
 				$extra['values'][$extra['fields'][$i]] = get_option($this->key . '_' . $extra['fields'][$i]);
 				if(!$extra['values'][$extra['fields'][$i]]) {
-					$extra['values'][$extra['fields'][$i]] = [];
+					$extra['values'][$extra['fields'][$i]] = [''];
 				}
 			}
 			array_push($this->codes, $extra);
