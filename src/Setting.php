@@ -114,6 +114,13 @@ class Setting {
 			array_push($this->elements, $type);
 			array_push($this->sanitizes, 'sanitize_text_field');
 			array_push($this->sanitizes_args, []);
+		} elseif($type == 'textarea') {
+			array_push($this->codes, '');
+			array_push($this->names, $name);
+			array_push($this->values, $value);
+			array_push($this->elements, $type);
+			array_push($this->sanitizes, 'sanitize_textarea_field');
+			array_push($this->sanitizes_args, []);
 		} else {
 			array_push($this->codes, '');
 			array_push($this->names, $name);
