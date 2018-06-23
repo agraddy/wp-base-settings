@@ -74,7 +74,7 @@ class Setting {
 		array_push($this->descriptions, $description);
 
 		if($type == 'select_user') {
-			array_push($this->codes, wp_dropdown_pages(array(
+			array_push($this->codes, wp_dropdown_users(array(
 				'show_option_none' => __( 'Please Select...' ),
 				'name' => $name,
 				'echo' => 0,
