@@ -4,6 +4,7 @@ namespace agraddy\base;
 class Setting {
 	public $action = '';
 	public $codes = [];
+	public $config = [];
 	public $descriptions = [];
 	public $elements = [];
 	public $htm = '';
@@ -132,10 +133,14 @@ class Setting {
 	}
 
 	function adminEnqueueScripts($hook) {
-		if($hook == 'admin_page_' . $this->action || $hook == 'settings_page_' . $this->action) {
+		if((isset($this->config['page_hook']) && $this->config['page_hook'] == $hook) || $hook == 'admin_page_' . $this->action || $hook == 'settings_page_' . $this->action) {
 			wp_enqueue_script($this->action, plugins_url('setting.js', __FILE__), array('jquery'));
 			wp_enqueue_style($this->action, plugins_url('setting.css', __FILE__));
 		}
+	}
+
+	function config($key, $value) {
+		$this->config[$key] = $value;
 	}
 
 	function html() {
