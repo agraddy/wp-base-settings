@@ -38,7 +38,14 @@
 			<tr class="form-field">
 				<th scope="row"><label><?php echo $titles[$i]; ?>:</th>
 				<td>
-					<?php if($elements[$i] == 'select'): ?>
+					<?php if($elements[$i] == 'radio'): ?>
+						<?php for($j = 0; $j < count($extras[$i]['labels']); $j++): ?>
+						<label><input type="radio" name="<?php echo $names[$i]; ?>" value="<?php echo esc_attr($extras[$i]['values'][$j]); ?>" <?php echo ($values[$i] == $extras[$i]['values'][$j]) ? 'checked' : ''; ?> /> <?php echo esc_html($extras[$i]['labels'][$j]); ?></label><br>
+						<?php endfor; ?>
+						<?php echo $descriptions[$i]; ?>
+					<?php echo $codes[$i]; ?>
+					<p class="description"><?php echo $descriptions[$i]; ?></p>
+					<?php elseif($elements[$i] == 'select'): ?>
 					<?php echo $codes[$i]; ?>
 					<p class="description"><?php echo $descriptions[$i]; ?></p>
 					<?php elseif($elements[$i] == 'checkbox'): ?>

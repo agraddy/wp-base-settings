@@ -7,6 +7,7 @@ class Setting {
 	public $config = [];
 	public $descriptions = [];
 	public $elements = [];
+	public $extras = [];
 	public $htm = '';
 	public $key;
 	public $names = [];
@@ -82,6 +83,7 @@ class Setting {
 				'selected' => $value
 			)));  
 
+			array_push($this->extras, []);
 			array_push($this->names, $name);
 			array_push($this->values, $value);
 			array_push($this->elements, 'select');
@@ -96,6 +98,7 @@ class Setting {
 				'selected' => $value
 			)));  
 
+			array_push($this->extras, []);
 			array_push($this->names, $name);
 			array_push($this->values, $value);
 			array_push($this->elements, 'select');
@@ -110,6 +113,7 @@ class Setting {
 				}
 			}
 			array_push($this->codes, $extra);
+			array_push($this->extras, []);
 			array_push($this->names, $name);
 			array_push($this->values, $value);
 			array_push($this->elements, $type);
@@ -117,6 +121,7 @@ class Setting {
 			array_push($this->sanitizes_args, []);
 		} elseif($type == 'textarea') {
 			array_push($this->codes, '');
+			array_push($this->extras, []);
 			array_push($this->names, $name);
 			array_push($this->values, $value);
 			array_push($this->elements, $type);
@@ -124,6 +129,7 @@ class Setting {
 			array_push($this->sanitizes_args, []);
 		} else {
 			array_push($this->codes, '');
+			array_push($this->extras, $extra);
 			array_push($this->names, $name);
 			array_push($this->values, $value);
 			array_push($this->elements, $type);
@@ -148,6 +154,7 @@ class Setting {
 		$codes = $this->codes;
 		$descriptions = $this->descriptions;
 		$elements = $this->elements;
+		$extras = $this->extras;
 		$names = $this->names;
 		$title = $this->title;
 		$titles = $this->titles;
